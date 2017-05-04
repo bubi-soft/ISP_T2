@@ -30,14 +30,28 @@ public class User {
 		return this.admin;
 	}
 	
-	public void modUser(User clienti) {
+	public void modUser(User clienti, int id, String nume, boolean admin) {
 		if(this.isAdmin()){
+			
+			System.out.println("Date actuale : ");
 			System.out.println("Id client: " + clienti.getId());
 			System.out.println("Nume: " + clienti.getNume());
 			System.out.print("Admin: ");
 			System.out.println(clienti.isAdmin() ? "Da":"Nu");
 			
-			//TODO afisare date curente client si intrabare ce se vrea modificat
+			System.out.println(" ");
+			
+			clienti.setId(id);
+			clienti.setNume(nume);
+			clienti.setAdmin(admin);
+			
+			System.out.println("Date modificate. Noile date : ");
+			
+			System.out.println("Id client: " + clienti.getId());
+			System.out.println("Nume: " + clienti.getNume());
+			System.out.print("Admin: ");
+			System.out.println(clienti.isAdmin() ? "Da":"Nu");
+			
 		}
 	}
 }
