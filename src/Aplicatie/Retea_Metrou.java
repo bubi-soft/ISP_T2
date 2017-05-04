@@ -3,13 +3,18 @@ package Aplicatie;
 import java.util.ArrayList;
 
 public class Retea_Metrou {
-	
+
 	private ArrayList<Linie> linii;
 	private ArrayList<Statie> statii;
 	
-	public Retea_Autobuz() {
+	public Retea_Metrou() {
 		this.linii = new ArrayList<Linie>();
 		this.statii = new ArrayList<Statie>();
+	}
+	
+	public Retea_Metrou(ArrayList<Statie> statii) {
+		this.linii = new ArrayList<Linie>();
+		this.statii = statii;
 	}
 	
 	public void setStatii(ArrayList<Statie> statii) {
@@ -24,22 +29,18 @@ public class Retea_Metrou {
 		this.statii.add(statie);
 	}
 	
-	public void addStatie(int index, String nume) {
-		this.statii.add(index, new Statie(nume));
-	}
-	
 	public void addStatie(String nume) {
 		this.statii.add(new Statie(nume));
 	}
 	
-	public void modStatie(String nume) {
-		//TODO afisare date curente statie si intrabare ce se vrea modificat
+	public void modStatie(String nume, String newNume) {
 		int index = 0;
 		for(;index < this.statii.size(); index++) {
 			if(this.statii.get(index).getNume().matches(nume))
 				break;
 		}
-		
+		this.statii.get(index).setNume(newNume);
+		System.out.println("Statie modificata. Noul nume: " + this.statii.get(index).getNume());
 	}
 	
 	public void delStatie(String nume) {
@@ -61,8 +62,8 @@ public class Retea_Metrou {
 	
 	public Linie getLinie(int id) {
 		int index = 0;
-		for(;index < linii.size(); index++) {
-			if(linii.get(index).getId() == id)
+		for(;index < this.linii.size(); index++) {
+			if(this.linii.get(index).getId() == id)
 				break;
 		}
 		return this.linii.get(index);
@@ -81,13 +82,14 @@ public class Retea_Metrou {
 		this.linii.remove(index);
 	}
 	
-	public void modLinie(int id) {
+	public void modLinie(int id, int newId) {
 		int index = 0;
 		for(;index < this.linii.size(); index++) {
 			if(this.linii.get(index).getId() == id)
 				break;
 		}
-		//TODO campurile ce trebuie modificate
+		this.linii.get(index).setId(newId);
+		System.out.println("Linia a fost modificata. Noul ID: " + this.linii.get(index).getId());
 	}
 	
 	public void solicitaRuta(Statie locatie, Statie destiantie) {
