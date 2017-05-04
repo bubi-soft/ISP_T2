@@ -12,6 +12,11 @@ public class Retea_Autobuz {
 		this.statii = new ArrayList<Statie>();
 	}
 	
+	public Retea_Autobuz(ArrayList<Statie> statii) {
+		this.linii = new ArrayList<Linie>();
+		this.statii = statii;
+	}
+	
 	public void setStatii(ArrayList<Statie> statii) {
 		this.statii = statii;
 	}
@@ -32,8 +37,8 @@ public class Retea_Autobuz {
 		this.statii.add(new Statie(nume));
 	}
 	
-	public void modStatie(String nume) {
-		//TODO afisare date curente statie si intrabare ce se vrea modificat
+	public void modStatie(String newNume) {
+		
 		int index = 0;
 		for(;index < this.statii.size(); index++) {
 			if(this.statii.get(index).getNume().matches(nume))

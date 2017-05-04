@@ -30,28 +30,17 @@ public class User {
 		return this.admin;
 	}
 	
-	public void modUser(User clienti, int id, String nume, boolean admin) {
+	public void modUser(User clienti, int newId, String newNume, boolean newAdmin) {
 		if(this.isAdmin()){
+			clienti.setId(newId);
+			clienti.setNume(newNume);
+			clienti.setAdmin(newAdmin);
 			
-			System.out.println("Date actuale : ");
-			System.out.println("Id client: " + clienti.getId());
-			System.out.println("Nume: " + clienti.getNume());
-			System.out.print("Admin: ");
+			System.out.println("Date modificate.\nNoile date : ");
+			System.out.println("\tId client: " + clienti.getId());
+			System.out.println("\tNume: " + clienti.getNume());
+			System.out.print("\tAdmin: ");
 			System.out.println(clienti.isAdmin() ? "Da":"Nu");
-			
-			System.out.println(" ");
-			
-			clienti.setId(id);
-			clienti.setNume(nume);
-			clienti.setAdmin(admin);
-			
-			System.out.println("Date modificate. Noile date : ");
-			
-			System.out.println("Id client: " + clienti.getId());
-			System.out.println("Nume: " + clienti.getNume());
-			System.out.print("Admin: ");
-			System.out.println(clienti.isAdmin() ? "Da":"Nu");
-			
 		}
 	}
 }

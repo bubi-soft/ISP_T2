@@ -40,7 +40,7 @@ public class Linie {
 	public void delStatie(Statie oprire) {
 		int index = 0;
 		for(;index < this.opriri.size(); index++) {
-			if(this.opriri.get(index).getNume().matches(nume))
+			if(this.opriri.get(index).getNume().matches(oprire.getNume()))
 				break;
 		}
 		this.opriri.remove(index);
