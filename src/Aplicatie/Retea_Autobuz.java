@@ -35,8 +35,8 @@ public class Retea_Autobuz {
 	public void modStatie(String nume) {
 		//TODO afisare date curente statie si intrabare ce se vrea modificat
 		int index = 0;
-		for(;index < statii.size(); index++) {
-			if(statii.get(index).getNume().matches(nume))
+		for(;index < this.statii.size(); index++) {
+			if(this.statii.get(index).getNume().matches(nume))
 				break;
 		}
 		
@@ -44,11 +44,11 @@ public class Retea_Autobuz {
 	
 	public void delStatie(String nume) {
 		int index = 0;
-		for(;index < statii.size(); index++) {
-			if(statii.get(index).getNume().matches(nume))
+		for(;index < this.statii.size(); index++) {
+			if(this.statii.get(index).getNume().matches(nume))
 				break;
 		}
-		this.linii.remove(index);
+		this.statii.remove(index);
 	}
 	
 	public void addLinie(int id, ArrayList<Statie> opriri) {
@@ -74,8 +74,8 @@ public class Retea_Autobuz {
 	
 	public void delLinie(int id) {
 		int index = 0;
-		for(;index < linii.size(); index++) {
-			if(linii.get(index).getId() == id)
+		for(;index < this.linii.size(); index++) {
+			if(this.linii.get(index).getId() == id)
 				break;
 		}
 		this.linii.remove(index);
@@ -83,8 +83,8 @@ public class Retea_Autobuz {
 	
 	public void modLinie(int id) {
 		int index = 0;
-		for(;index < linii.size(); index++) {
-			if(linii.get(index).getId() == id)
+		for(;index < this.linii.size(); index++) {
+			if(this.linii.get(index).getId() == id)
 				break;
 		}
 		//TODO campurile ce trebuie modificate

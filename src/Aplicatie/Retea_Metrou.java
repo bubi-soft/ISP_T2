@@ -3,11 +3,11 @@ package Aplicatie;
 import java.util.ArrayList;
 
 public class Retea_Metrou {
-
+	
 	private ArrayList<Linie> linii;
 	private ArrayList<Statie> statii;
 	
-	public Retea_Metrou() {
+	public Retea_Autobuz() {
 		this.linii = new ArrayList<Linie>();
 		this.statii = new ArrayList<Statie>();
 	}
@@ -35,19 +35,20 @@ public class Retea_Metrou {
 	public void modStatie(String nume) {
 		//TODO afisare date curente statie si intrabare ce se vrea modificat
 		int index = 0;
-		for(;index < statii.size(); index++) {
-			if(statii.get(index).getNume().matches(nume))
+		for(;index < this.statii.size(); index++) {
+			if(this.statii.get(index).getNume().matches(nume))
 				break;
 		}
+		
 	}
 	
 	public void delStatie(String nume) {
 		int index = 0;
-		for(;index < statii.size(); index++) {
-			if(statii.get(index).getNume().matches(nume))
+		for(;index < this.statii.size(); index++) {
+			if(this.statii.get(index).getNume().matches(nume))
 				break;
 		}
-		this.linii.remove(index);
+		this.statii.remove(index);
 	}
 	
 	public void addLinie(int id, ArrayList<Statie> opriri) {
@@ -73,8 +74,8 @@ public class Retea_Metrou {
 	
 	public void delLinie(int id) {
 		int index = 0;
-		for(;index < linii.size(); index++) {
-			if(linii.get(index).getId() == id)
+		for(;index < this.linii.size(); index++) {
+			if(this.linii.get(index).getId() == id)
 				break;
 		}
 		this.linii.remove(index);
@@ -82,10 +83,14 @@ public class Retea_Metrou {
 	
 	public void modLinie(int id) {
 		int index = 0;
-		for(;index < linii.size(); index++) {
-			if(linii.get(index).getId() == id)
+		for(;index < this.linii.size(); index++) {
+			if(this.linii.get(index).getId() == id)
 				break;
 		}
 		//TODO campurile ce trebuie modificate
+	}
+	
+	public void solicitaRuta(Statie locatie, Statie destiantie) {
+		//TODO implement route search
 	}
 }
