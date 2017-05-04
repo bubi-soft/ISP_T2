@@ -33,7 +33,7 @@ public class User {
 	}
 	
 	public boolean isAdmin() {
-		return admin;
+		return this.admin;
 	}
 	
 	public void modUser(User clienti, int newId, String newNume, boolean newAdmin) {
