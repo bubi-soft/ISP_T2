@@ -6,6 +6,12 @@ public class User {
 	private String nume;
 	private boolean admin;
 	
+	public User(int id, String nume, boolean admin) {
+		this.id = id;
+		this.nume = nume;
+		this.admin = admin;
+	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -27,7 +33,7 @@ public class User {
 	}
 	
 	public boolean isAdmin() {
-		return this.admin;
+		return admin;
 	}
 	
 	public void modUser(User clienti, int id, String nume, boolean admin) {
