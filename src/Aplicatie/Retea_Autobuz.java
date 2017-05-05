@@ -69,10 +69,6 @@ public class Retea_Autobuz {
 		return this.linii.get(index);
 	}
 	
-	public ArrayList<Linie> getLinii() {
-		return this.linii;
-	}
-	
 	public void delLinie(int id) {
 		int index = 0;
 		for(;index < this.linii.size(); index++) {
