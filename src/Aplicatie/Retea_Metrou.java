@@ -68,15 +68,6 @@ public class Retea_Metrou {
 		}
 		return this.linii.get(index);
 	}
-		
-	public void delLinie(int id) {
-		int index = 0;
-		for(;index < this.linii.size(); index++) {
-			if(this.linii.get(index).getId() == id)
-				break;
-		}
-		this.linii.remove(index);
-	}
 	
 	public void modLinie(int id, int newId) {
 		int index = 0;
@@ -86,6 +77,15 @@ public class Retea_Metrou {
 		}
 		this.linii.get(index).setId(newId);
 		System.out.println("Linia a fost modificata. Noul ID: " + this.linii.get(index).getId());
+	}
+	
+	public void delLinie(int id) {
+		int index = 0;
+		for(;index < this.linii.size(); index++) {
+			if(this.linii.get(index).getId() == id)
+				break;
+		}
+		this.linii.remove(index);
 	}
 	
 	public void solicitaRuta(Statie locatie, Statie destiantie) {
