@@ -11,7 +11,7 @@ public class User {
 		this.nume = nume;
 		this.admin = admin;
 	}
-
+	
 	public void setId(int id) {
 		this.id = id;
 	}
