@@ -97,7 +97,58 @@ public class Retea_Autobuz {
 		this.linii.remove(index);
 	}
 	
-	public void solicitaRuta(Statie locatie, Statie destiantie) {
-		//TODO implement route search
+	public boolean solicitaRuta(Statie locatie, Statie destinatie) {
+		//cautare existenta statii
+		int index_locatie = -1;
+		int index_destinatie = -1;
+		for(int i = 1; i < this.statii.size(); i++) {
+			if(this.statii.get(i).getNume().matches(locatie.getNume()))
+				index_locatie = i;
+			if(this.statii.get(i).getNume().matches(destinatie.getNume()))
+				index_locatie = i;
+			if(index_locatie >= 0 && index_destinatie >=0)
+				break;
+		}
+		
+		if(index_locatie == -1) {
+			System.out.println("Statia de locatie nu exista");
+			return false;
+		}
+		
+		if(index_destinatie == -1) {
+			System.out.println("Statia de destinatie nu exista");
+			return false;
+		}
+		
+		//calculare ruta
+		ArrayList<Integer> ruta= new ArrayList<Integer>();
+		ArrayList<Statie> start= new ArrayList<Statie>();
+		ArrayList<Statie> stop= new ArrayList<Statie>();
+		
+		//cautare linie de plecare
+		for(int i = 1; i < this.linii.size(); i++) {
+			for(int j = 1; j < this.statii.size(); j++) {
+				if(this.statii.get(j).getNume().matches(locatie.getNume())) {
+					ruta.add(i);
+					start.add(this.statii.get(j));
+					break;
+				}
+			}
+		}
+		
+		//verificare existenta destinatie pe linia curenta
+		for(int j = 1; j < this.linii.get(ruta.get(1)).getOpriri().size(); j++) {
+			if(this.linii.get(ruta.get(1)).getOpriri().get(j).getNume().matches(destinatie.getNume())) {
+				stop.add(this.linii.get(ruta.get(1)).getOpriri().get(j));
+				break;
+			}
+		}
+		
+		if(stop.size() > 0) {
+			
+			return true;
+		}
+		
+		return true;
 	}
 }
