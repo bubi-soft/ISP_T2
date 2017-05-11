@@ -145,7 +145,7 @@ public class Retea_Autobuz {
 		}
 		
 		if(stop.size() > 0) {
-			
+			//asda
 			return true;
 		}
 		
