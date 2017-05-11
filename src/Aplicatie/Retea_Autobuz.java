@@ -21,6 +21,15 @@ public class Retea_Autobuz {
 		this.statii = statii;
 	}
 	
+	public Statie getStatie(String nume) {
+		int index = 0;
+		for(;index < this.statii.size(); index++) {
+			if(this.statii.get(index).getNume().matches(nume))
+				break;
+		}
+		return this.statii.get(index);
+	}
+	
 	public ArrayList<Statie> getStatii() {
 		return this.statii;
 	}
