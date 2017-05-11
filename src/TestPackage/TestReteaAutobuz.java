@@ -33,4 +33,6 @@ public class TestReteaAutobuz {
 		
 		assertEquals(ra.getLinie(23).getOpriri(), ln.getOpriri());
 	}
+	
+	
 }

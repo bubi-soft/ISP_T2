@@ -1,5 +1,7 @@
 package Aplicatie;
 
+import java.util.ArrayList;
+
 public class User {
 	
 	private int id;
@@ -34,6 +36,34 @@ public class User {
 	
 	public boolean isAdmin() {
 		return this.admin;
+	}
+	
+	public void delUser(User user) {
+		user = null;
+	}
+	
+	public void modificareUser (int id, ArrayList<User> useri, int newId, String newNume, boolean newAdmin){
+		
+		if(this.isAdmin()){
+			
+			int index = 0;
+			for(;index < useri.size(); index++) {
+				
+				if(useri.get(index).getId() == id)
+					break;
+			}
+			
+				
+			if(index == useri.size()) {
+				System.out.println("Clientul nu exista.");
+			}
+			else {
+			
+				useri.get(index).setId(newId);
+				useri.get(index).setNume(newNume);
+				useri.get(index).setAdmin(newAdmin);
+			}
+		}	
 	}
 	
 	public void modUser(User clienti, int newId, String newNume, boolean newAdmin) {

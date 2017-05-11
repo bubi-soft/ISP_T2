@@ -42,16 +42,6 @@ public class Retea_Metrou {
 		this.statii.add(new Statie(nume));
 	}
 	
-	public void modStatie(String nume, String newNume) {
-		int index = 0;
-		for(;index < this.statii.size(); index++) {
-			if(this.statii.get(index).getNume().matches(nume))
-				break;
-		}
-		this.statii.get(index).setNume(newNume);
-		System.out.println("Statie modificata. Noul nume: " + this.statii.get(index).getNume());
-	}
-	
 	public void delStatie(String nume) {
 		int index = 0;
 		for(;index < this.statii.size(); index++) {
@@ -86,6 +76,40 @@ public class Retea_Metrou {
 		}
 		this.linii.get(index).setId(newId);
 		System.out.println("Linia a fost modificata. Noul ID: " + this.linii.get(index).getId());
+	}
+	
+	public void modStatie(String nume, String newNume) {
+		int index = 0;
+		for(;index < this.statii.size(); index++) {
+			if(this.statii.get(index).getNume().matches(nume))
+				break;
+		}
+		this.statii.get(index).setNume(newNume);
+		System.out.println("Statie modificata. Noul nume: " + this.statii.get(index).getNume());
+	}
+	
+	public void modificareLinie(int id, int newId, ArrayList<Statie> statiiNoi)
+	{
+		int index = 0;
+		int total_statii = this.statii.size();
+		
+		for(;index < this.linii.size(); index++) {
+			if(this.linii.get(index).getId() == id)
+				break;
+		}
+		this.linii.get(index).setId(newId);
+		
+		index = 0;
+		for(;index < statiiNoi.size(); index++) {
+			this.statii.get(index).setNume(statiiNoi.get(index).getNume());
+		}
+		
+		if(total_statii > index){
+			for(int i = index; i < total_statii; i++){
+				delStatie(this.statii.get(i).getNume());
+			}
+		}
+		
 	}
 	
 	public void delLinie(int id) {

@@ -23,7 +23,7 @@ public class Retea_Autobuz {
 	
 	public Statie getStatie(String nume) {
 		int index = 0;
-		for(;index <= this.statii.size(); index++) {
+		for(;index < this.statii.size(); index++) {
 			if(this.statii.get(index).getNume().matches(nume))
 				break;
 		}
@@ -44,7 +44,7 @@ public class Retea_Autobuz {
 	
 	public void modStatie(String nume, String newNume) {
 		int index = 0;
-		for(;index <= this.statii.size(); index++) {
+		for(;index < this.statii.size(); index++) {
 			if(this.statii.get(index).getNume().matches(nume))
 				break;
 		}
@@ -54,7 +54,7 @@ public class Retea_Autobuz {
 	
 	public void delStatie(String nume) {
 		int index = 0;
-		for(;index <= this.statii.size(); index++) {
+		for(;index < this.statii.size(); index++) {
 			if(this.statii.get(index).getNume().matches(nume))
 				break;
 		}
@@ -71,7 +71,7 @@ public class Retea_Autobuz {
 
 	public Linie getLinie(int id) {
 		int index = 0;
-		for(;index <= this.linii.size(); index++) {
+		for(;index < this.linii.size(); index++) {
 			if(this.linii.get(index).getId() == id)
 				break;
 		}
@@ -80,7 +80,7 @@ public class Retea_Autobuz {
 	
 	public void modLinie(int id, int newId) {
 		int index = 0;
-		for(;index <= this.linii.size(); index++) {
+		for(;index < this.linii.size(); index++) {
 			if(this.linii.get(index).getId() == id)
 				break;
 		}
@@ -90,7 +90,7 @@ public class Retea_Autobuz {
 	
 	public void delLinie(int id) {
 		int index = 0;
-		for(;index <= this.linii.size(); index++) {
+		for(;index < this.linii.size(); index++) {
 			if(this.linii.get(index).getId() == id)
 				break;
 		}
@@ -101,7 +101,7 @@ public class Retea_Autobuz {
 		//cautare existenta statii
 		int index_locatie = -1;
 		int index_destinatie = -1;
-		for(int i = 1; i <= this.statii.size(); i++) {
+		for(int i = 0; i < this.statii.size(); i++) {
 			if(this.statii.get(i).getNume().matches(locatie.getNume()))
 				index_locatie = i;
 			if(this.statii.get(i).getNume().matches(destinatie.getNume()))
@@ -126,12 +126,40 @@ public class Retea_Autobuz {
 		ArrayList<Statie> stop = new ArrayList<Statie>();
 		ArrayList<Integer> curent = new ArrayList<Integer>();// linia ce trebuie verificata pentru legatura
 		
-		ruta.add(index_locatie);
+		//cautare linie de plecare si de sosire
+		int index_plecare = -1;
+		int index_sosire = -1;
+		for(int i = 0; i < this.linii.size(); i++) {
+			for(int j = 0; j < this.statii.size(); j++) {
+				if(this.statii.get(j).getNume().matches(locatie.getNume())) {
+					index_plecare = i;
+				}
+				if(this.statii.get(j).getNume().matches(destinatie.getNume())) {
+					index_sosire = i;
+				}
+				if(index_plecare >= 0 && index_sosire >=0)
+					break;
+			}
+			if(index_plecare >= 0 && index_sosire >=0)
+				break;
+		}
+		
+		if(index_plecare == -1) {
+			System.out.println("Statia de locatie nu se afla pe o linie");
+			return false;
+		}
+		
+		if(index_sosire == -1) {
+			System.out.println("Statia de destinatie nu se afla pe o linie");
+			return false;
+		}
+		
+		ruta.add(index_plecare);
 		start.add(locatie);
-		curent.add(1);
+		curent.add(0);
 		
 		boolean complet = false;
-		int i = 1;
+		int i = 0;
 		
 		while(!complet) { //parcurgere linii din ruta
 			
@@ -139,26 +167,31 @@ public class Retea_Autobuz {
 			Linie ln_curenta = this.linii.get(ruta.get(i));
 			
 			//verificare existenta destinatie pe linia curenta
-			if(ln_curenta.getId() == this.linii.get(index_destinatie).getId()) {
+			if(ln_curenta.getId() == this.linii.get(index_sosire).getId()) {
 				stop.add(destinatie);
 				complet = true;
 				break;
 			}
 			
-			Statie st_curenta = start.get(i);
-			int index_st_curent = 1;
-			for(; index_st_curent <= ln_curenta.getOpriri().size(); index_st_curent++) {
+			Statie st_curenta;
+			if(stop.size() < start.size())
+				st_curenta = start.get(i);
+			else
+				st_curenta = stop.get(i);
+			
+			int index_st_curent = 0;
+			for(; index_st_curent < ln_curenta.getOpriri().size(); index_st_curent++) {
 				Statie st_verificat = ln_curenta.getOpriri().get(index_st_curent);
 				if(st_verificat.getNume().matches(st_curenta.getNume()))
 					break;
 			}
 			
-			for(;index_st_curent <= ln_curenta.getOpriri().size(); index_st_curent++) {
+			for(;index_st_curent < ln_curenta.getOpriri().size(); index_st_curent++) {
 				//parcurgerea statiilor liniie din ruta pentru a gasi o legatura
 				st_curenta = ln_curenta.getOpriri().get(index_st_curent);
 				boolean legatura = false;
 				//parcurgerea liniilor pentru a gasi statia de legatura daca aceasta exista
-				for(; curent.get(i) <= this.linii.size(); curent.set(i, curent.get(i)+1)) {
+				for(; curent.get(i) < this.linii.size(); curent.set(i, curent.get(i)+1)) {
 					
 					int j = curent.get(i);
 					Linie ln_verificare = this.linii.get(j);
@@ -166,7 +199,7 @@ public class Retea_Autobuz {
 					if(ln_curenta.getId() != ln_verificare.getId()) {
 						
 						//cautam o statie de legatura in linia ce se verifica
-						for(int l = 1; l <= ln_verificare.getOpriri().size(); l++) {
+						for(int l = 0; l < ln_verificare.getOpriri().size(); l++) {
 							Statie st_verificat = ln_verificare.getOpriri().get(l);
 							if(st_verificat.getNume().matches(st_curenta.getNume())) {
 								legatura = true;
@@ -179,6 +212,7 @@ public class Retea_Autobuz {
 							i++;
 							ruta.add(curent.get(i));
 							start.add(st_curenta);
+							curent.add(j);
 							break;
 						}
 					}
@@ -188,8 +222,17 @@ public class Retea_Autobuz {
 				if(legatura) {
 					break;
 				}
+				else {
+					ruta.remove(i);
+					start.remove(i);
+					stop.remove(i);
+					curent.remove(i);
+					i--;
+				}
 			}
 		}
+		if(ruta.isEmpty())
+			return false;
 		
 		this.afisareRuta(ruta, start, stop);
 		return true;
@@ -197,12 +240,12 @@ public class Retea_Autobuz {
 	
 	private void afisareRuta(ArrayList<Integer> ruta, ArrayList<Statie> start, ArrayList<Statie> stop) {
 		
-		for(int i = 1; i <= ruta.size(); i++) {
+		for(int i = 0; i < ruta.size(); i++) {
 			System.out.println("Linia: " + this.linii.get(ruta.get(i)).getId());
 			
 			//afisare statiile prin care se trece
 			boolean ok = false;
-			for(int j = 1; j <= this.linii.get(ruta.get(i)).getOpriri().size(); j++) {
+			for(int j = 0; j < this.linii.get(ruta.get(i)).getOpriri().size(); j++) {
 				if(this.linii.get(ruta.get(i)).getOpriri().get(j).getNume().matches(start.get(i).getNume()))
 					ok = true;
 				
