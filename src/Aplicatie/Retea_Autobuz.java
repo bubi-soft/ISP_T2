@@ -130,11 +130,15 @@ public class Retea_Autobuz {
 		int index_plecare = -1;
 		int index_sosire = -1;
 		for(int i = 0; i < this.linii.size(); i++) {
-			for(int j = 0; j < this.statii.size(); j++) {
-				if(this.statii.get(j).getNume().matches(locatie.getNume())) {
+			Linie ln_curenta = this.linii.get(i);
+			
+			for(int j = 0; j < ln_curenta.getOpriri().size(); j++) {
+				Statie st_verificat = ln_curenta.getOpriri().get(j);
+				
+				if(st_verificat.getNume().matches(locatie.getNume())) {
 					index_plecare = i;
 				}
-				if(this.statii.get(j).getNume().matches(destinatie.getNume())) {
+				if(st_verificat.getNume().matches(destinatie.getNume())) {
 					index_sosire = i;
 				}
 				if(index_plecare >= 0 && index_sosire >=0)
@@ -174,16 +178,19 @@ public class Retea_Autobuz {
 			}
 			
 			Statie st_curenta;
+			int index_st_curent = 0;
+			
 			if(stop.size() < start.size())
 				st_curenta = start.get(i);
-			else
+			else {
 				st_curenta = stop.get(i);
 			
-			int index_st_curent = 0;
-			for(; index_st_curent < ln_curenta.getOpriri().size(); index_st_curent++) {
-				Statie st_verificat = ln_curenta.getOpriri().get(index_st_curent);
-				if(st_verificat.getNume().matches(st_curenta.getNume()))
-					break;
+				
+				for(; index_st_curent < ln_curenta.getOpriri().size(); index_st_curent++) {
+					Statie st_verificat = ln_curenta.getOpriri().get(index_st_curent);
+					if(st_verificat.getNume().matches(st_curenta.getNume()))
+						break;
+				}
 			}
 			
 			for(;index_st_curent < ln_curenta.getOpriri().size(); index_st_curent++) {
@@ -191,9 +198,9 @@ public class Retea_Autobuz {
 				st_curenta = ln_curenta.getOpriri().get(index_st_curent);
 				boolean legatura = false;
 				//parcurgerea liniilor pentru a gasi statia de legatura daca aceasta exista
-				for(; curent.get(i) < this.linii.size(); curent.set(i, curent.get(i)+1)) {
+				for(int j = curent.get(i); j < this.linii.size(); j++) {
 					
-					int j = curent.get(i);
+					
 					Linie ln_verificare = this.linii.get(j);
 					
 					if(ln_curenta.getId() != ln_verificare.getId()) {
@@ -209,10 +216,10 @@ public class Retea_Autobuz {
 						
 						if(legatura) {
 							stop.add(st_curenta);
+							curent.add(j);
 							i++;
 							ruta.add(curent.get(i));
 							start.add(st_curenta);
-							curent.add(j);
 							break;
 						}
 					}
@@ -223,17 +230,26 @@ public class Retea_Autobuz {
 					break;
 				}
 				else {
-					ruta.remove(i);
-					start.remove(i);
-					stop.remove(i);
-					curent.remove(i);
-					i--;
+					if(index_st_curent == ln_curenta.getOpriri().size()) {
+						ruta.remove(i);
+						start.remove(i);
+						stop.remove(i);
+						curent.remove(i);
+						i--;
+					}
 				}
 			}
+			
 		}
 		if(ruta.isEmpty())
 			return false;
 		
+		if(index_locatie > index_destinatie) {
+			ArrayList<Statie> aux = start;
+			start = stop;
+			stop = aux;
+		}
+			
 		this.afisareRuta(ruta, start, stop);
 		return true;
 	}

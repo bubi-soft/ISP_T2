@@ -34,8 +34,6 @@ public class TestRuta {
 		ra.addStatie("Republica");
 		ra.addStatie("Pantelimon");
 		
-		ra.addLinie(1,ra.getStatii());
-		
 		ra.addStatie("Pipera");
 		ra.addStatie("Aurel Vlaicu");
 		ra.addStatie("Aviatorilor");
@@ -49,7 +47,6 @@ public class TestRuta {
 		ra.addStatie("Dimitrie Leonida");
 		ra.addStatie("Berceni");
 
-
 		ra.addStatie("Preciziei");
 		ra.addStatie("Pacii");
 		ra.addStatie("Gorjului");
@@ -59,6 +56,30 @@ public class TestRuta {
 		ra.addStatie("Nicolae Teclu");
 		ra.addStatie("Anghel Saligny");
 		
+		ra.addLinie(1);
+		ra.getLinie(1).addStatie(ra.getStatie("Dristor1"));
+		ra.getLinie(1).addStatie(ra.getStatie("Piata_Muncii"));
+		ra.getLinie(1).addStatie(ra.getStatie("Piata_Iancului"));
+		ra.getLinie(1).addStatie(ra.getStatie("Obor"));
+		ra.getLinie(1).addStatie(ra.getStatie("Stefan Cel Mare"));
+		ra.getLinie(1).addStatie(ra.getStatie("Piata Victoriei"));
+		ra.getLinie(1).addStatie(ra.getStatie("Gara de Nord"));
+		ra.getLinie(1).addStatie(ra.getStatie("Basarab"));
+		ra.getLinie(1).addStatie(ra.getStatie("Crangasi"));
+		ra.getLinie(1).addStatie(ra.getStatie("Petrache Poenaru"));
+		ra.getLinie(1).addStatie(ra.getStatie("Grozavesti"));
+		ra.getLinie(1).addStatie(ra.getStatie("Eroilor"));
+		ra.getLinie(1).addStatie(ra.getStatie("Izvor"));
+		ra.getLinie(1).addStatie(ra.getStatie("Piata Unirii"));
+		ra.getLinie(1).addStatie(ra.getStatie("Timpuri Noi"));
+		ra.getLinie(1).addStatie(ra.getStatie("Mihai Bravu"));
+		ra.getLinie(1).addStatie(ra.getStatie("Nicolae Grigorescu"));
+		ra.getLinie(1).addStatie(ra.getStatie("Dristor2"));
+		ra.getLinie(1).addStatie(ra.getStatie("Titan"));
+		ra.getLinie(1).addStatie(ra.getStatie("Costin Georgian"));
+		ra.getLinie(1).addStatie(ra.getStatie("Republica"));
+		ra.getLinie(1).addStatie(ra.getStatie("Pantelimon"));
+				
 		ra.addLinie(2);
 		ra.getLinie(2).addStatie(ra.getStatie("Pipera"));
 		ra.getLinie(2).addStatie(ra.getStatie("Aurel Vlaicu"));
@@ -92,10 +113,10 @@ public class TestRuta {
 		ra.getLinie(3).addStatie(ra.getStatie("Nicolae Teclu"));
 		ra.getLinie(3).addStatie(ra.getStatie("Anghel Saligny"));
 		
-		//assertTrue(ra.solicitaRuta(ra.getStatie("Berceni"), ra.getStatie("Pipera")));
-		//assertTrue(ra.solicitaRuta(ra.getStatie("Nicolae Teclu"), ra.getStatie("Pacii")));
-		//assertTrue(ra.solicitaRuta(ra.getStatie("Piata_Muncii"), ra.getStatie("Eroilor")));
-		assertTrue(ra.solicitaRuta(ra.getStatie("Berceni"), ra.getStatie("Politehnica")));
+		assertTrue(ra.solicitaRuta(ra.getStatie("Berceni"), ra.getStatie("Pipera")));
+		assertTrue(ra.solicitaRuta(ra.getStatie("Nicolae Teclu"), ra.getStatie("Pacii")));
+		assertTrue(ra.solicitaRuta(ra.getStatie("Piata_Muncii"), ra.getStatie("Eroilor")));
+		assertTrue(ra.solicitaRuta(ra.getStatie("Berceni"), ra.getStatie("Eroilor")));
 	}
 
 }
